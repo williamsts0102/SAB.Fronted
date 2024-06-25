@@ -1,0 +1,36 @@
+.alert-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.alert-card.active {
+  background-color: red;
+  color: white;
+}
+
+.alert-card.inactive {
+  background-color: green;
+  color: white;
+}
+
+.alert-card h3 {
+  margin-top: 0;
+}
+
+.alert-card button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.alert-card button:hover {
+  background-color: #0056b3;
+}

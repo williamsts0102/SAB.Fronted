@@ -1,0 +1,6 @@
+<div class="alert-card" [ngClass]="{'active': alert.bitEstado, 'inactive': !alert.bitEstado}">
+    <h3>{{ alert.strCodAlerta }}</h3>
+    <p>{{ alert.strDepartamento }} - {{ alert.strProvincia }} - {{ alert.strDistrito }}</p>
+    <p>{{ alert.strDescripcion }}</p>
+    <button (click)="openMap(alert.strLatitud, alert.strLongitud)">Ver en Google Maps</button>
+</div>

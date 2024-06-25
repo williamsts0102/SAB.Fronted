@@ -1,0 +1,24 @@
+<nav class="navbar">
+    <div class="container">
+        <div class="navbar-brand">
+            <a routerLink="/" class="navbar-item">SAB</a>
+        </div>
+        <div [ngClass]="{'navbar-menu': true, 'is-active': menuActive}">
+            <ul class="navbar-list">
+                <li class="navbar-item">
+                    <a routerLink="/alerta" class="navbar-link">Alerta</a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link">Personal</a>
+                </li>
+                <li class="navbar-item">
+                    <a class="navbar-link">Estadística</a>
+                </li>
+            </ul>
+            <button class="logout-button" (click)="logout()">Salir</button>
+        </div>
+        <div class="navbar-burger" (click)="toggleMenu()">
+            &#9776;
+        </div>
+    </div>
+</nav>

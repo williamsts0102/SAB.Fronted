@@ -55,12 +55,16 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4200,
+            "open": true
+          },
           "configurations": {
             "production": {
-              "buildTarget": "SAB.Fronted:build:production"
+              "browserTarget": "SAB.Fronted:build:production"
             },
             "development": {
-              "buildTarget": "SAB.Fronted:build:development"
+              "browserTarget": "SAB.Fronted:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -91,5 +95,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

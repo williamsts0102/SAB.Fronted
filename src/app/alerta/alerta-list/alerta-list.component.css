@@ -1,0 +1,13 @@
+.alert-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.alert-container {
+  flex: 1 1 300px; /* Mínimo de 300px por tarjeta */
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+}
