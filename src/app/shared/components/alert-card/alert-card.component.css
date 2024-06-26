@@ -4,6 +4,11 @@
   padding: 1rem;
   margin: 1rem 0;
   text-align: center;
+  width: 300px; /* Fija el ancho de la tarjeta */
+  word-wrap: break-word; /* Ajusta las palabras largas */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
 }
 
 .alert-card.active {
