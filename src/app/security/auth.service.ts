@@ -17,7 +17,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(usuario: string, clave: string): Observable<LoginResponse> {
-    const body = { Usuario: usuario, Clave: clave }; // Nombres de campos en mayúsculas
+    const body = { Usuario: usuario, Clave: clave };
     return this.http.post<LoginResponse>(this.apiUrl, body);
   }
 }
