@@ -9,6 +9,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: normal; /* Permite que el texto se ajuste a múltiples líneas */
+  cursor: pointer;
 }
 
 .alert-card.active {
@@ -38,4 +39,7 @@
 
 .alert-card button:hover {
   background-color: #0056b3;
+}
+.alert-card:hover {
+  transform: scale(1.02);
 }
