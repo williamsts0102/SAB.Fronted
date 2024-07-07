@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertaService } from '../../core/services/alerta.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import {
   GoogleMap,
   MapDirectionsRenderer,
@@ -39,7 +40,8 @@ export class AlertaDetailComponent {
 
   constructor(
     private route: ActivatedRoute,
-    private alertaService: AlertaService
+    private alertaService: AlertaService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +74,8 @@ export class AlertaDetailComponent {
         .subscribe(() => {
           this.alerta!.bitEstado = false;
         });
+        localStorage.clear();
+        this.router.navigate(['/alerta']);
     }
   }
 
@@ -82,6 +86,8 @@ export class AlertaDetailComponent {
         .subscribe(() => {
           this.alerta!.bitEstado = false;
         });
+        localStorage.clear();
+        this.router.navigate(['/alerta']);
     }
   }
 
