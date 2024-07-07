@@ -1,1 +1,27 @@
-<p>alerta-detail works!</p>
+<div *ngIf="alerta" class="alert-detail">
+    <h1>Detalle de Alerta</h1>
+    <p><strong>Código:</strong> {{ alerta.strCodAlerta }}</p>
+    <p><strong>Departamento:</strong> {{ alerta.strDepartamento }}</p>
+    <p><strong>Provincia:</strong> {{ alerta.strProvincia }}</p>
+    <p><strong>Distrito:</strong> {{ alerta.strDistrito }}</p>
+    <p><strong>Dirección:</strong> {{ alerta.strDireccion }}</p>
+    <p><strong>Descripción:</strong> {{ alerta.strDescripcion }}</p>
+    <div id="map" style="height: 400px; width: 100%;"></div> <!-- Añadir mapa aquí -->
+    <div *ngIf="alerta.bitEstado">
+        <button class="descartar-button" (click)="descartarAlerta()">Descartar</button>
+        <div>
+            <label for="grupoPersonal">Asignar a Grupo Personal:</label>
+            <select id="grupoPersonal" [(ngModel)]="selectedGrupoPersonal">
+                <option *ngFor="let grupo of gruposPersonalesActivos" [value]="grupo.intIdGrupoPersonal">{{
+                    grupo.strNombreGrupoPersonal }}</option>
+            </select>
+            <button class="asignar-button" (click)="actualizarAlerta()">Asignar</button>
+        </div>
+    </div>
+
+    <div *ngIf="!alerta.bitEstado">
+        <button class="resolver-button" (click)="actualizarAlerta()">Alerta Resuelta</button>
+    </div>
+</div>
+
+<p *ngIf="!alerta">Cargando...</p>

@@ -4,5 +4,5 @@ import { AlertaDetailComponent } from './alerta-detail/alerta-detail.component';
 
 export const ALERTA_ROUTES: Routes = [
   { path: '', component: AlertaListComponent },
-  { path: ':slug', component: AlertaDetailComponent },
+  { path: ':strCodAlerta', component: AlertaDetailComponent },
 ];
