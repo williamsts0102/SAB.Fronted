@@ -4,15 +4,25 @@ import { GruposPersonalesActivos } from '../../core/models/grupospersonalesactiv
 import { ActivatedRoute } from '@angular/router';
 import { AlertaService } from '../../core/services/alerta.service';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { GoogleMapsLoaderService } from '../../core/services/google-maps-loader.service';
+import {
+  GoogleMap,
+  MapDirectionsRenderer,
+  MapDirectionsService,
+  MapMarker,
+} from '@angular/google-maps';
 
 declare const google: any;
 @Component({
   selector: 'app-alerta-detail',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    GoogleMap,
+    MapMarker,
+    MapDirectionsRenderer,
+  ],
   templateUrl: './alerta-detail.component.html',
   styleUrls: ['./alerta-detail.component.css'],
 })
@@ -22,11 +32,14 @@ export class AlertaDetailComponent {
   selectedGrupoPersonal: number | null = null;
   map: any = null;
   mapLoaded = false;
+  latitud: number | null = null;
+  longitud: number | null = null;
+  originMarker: MapMarker | null = null;
+  destinationMarker: MapMarker | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private alertaService: AlertaService,
-    private googleMapsLoader: GoogleMapsLoaderService
+    private alertaService: AlertaService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +47,14 @@ export class AlertaDetailComponent {
     if (codigo) {
       this.alertaService.detalleAlerta(codigo).subscribe((alerta) => {
         this.alerta = alerta;
+        if (this.alerta && this.alerta.strLatitud && this.alerta.strLongitud) {
+          this.latitud = parseFloat(this.alerta.strLatitud);
+          this.longitud = parseFloat(this.alerta.strLongitud);
+          // Create origin marker on map initialization
+          this.createOriginMarker();
+          // Create destination marker based on alerta data
+          this.createDestinationMarker();
+        }
         if (this.alerta && this.alerta.bitEstado) {
           this.alertaService
             .obtenerGruposPersonalesActivos()
@@ -41,18 +62,9 @@ export class AlertaDetailComponent {
               this.gruposPersonalesActivos = grupos;
             });
         }
-        this.loadMap();
       });
     }
   }
-
-  ngOnDestroy(): void {
-    // Limpiar la instancia del mapa al salir del componente para evitar problemas de memoria
-    if (this.map) {
-      this.map = null;
-    }
-  }
-
   descartarAlerta(): void {
     if (this.alerta) {
       this.alertaService
@@ -73,48 +85,30 @@ export class AlertaDetailComponent {
     }
   }
 
-  initMap(): void {
-    if (this.alerta && google && !this.map) {
-      const lat = parseFloat(this.alerta.strLatitud);
-      const lng = parseFloat(this.alerta.strLongitud);
-
-      if (!isNaN(lat) && !isNaN(lng) && isFinite(lat) && isFinite(lng)) {
-        this.map = new google.maps.Map(document.getElementById('map')!, {
-          center: { lat, lng },
-          zoom: 15,
-        });
-        new google.maps.Marker({
-          position: { lat, lng },
-          map: this.map,
-        });
-      } else {
-        console.error(
-          'Invalid coordinates:',
-          this.alerta.strLatitud,
-          this.alerta.strLongitud
-        );
-      }
+  zoom = 13;
+  onMapClick(event: google.maps.MapMouseEvent) {
+    if (event.latLng) {
+      console.log(event.latLng.toJSON());
     }
   }
 
-  private destroyMap(): void {
+  createOriginMarker() {
     if (this.map) {
-      const mapContainer = document.getElementById('map');
-      while (mapContainer && mapContainer.firstChild) {
-        mapContainer.removeChild(mapContainer.firstChild);
-      }
-      this.map = null;
+      this.originMarker = new google.maps.Marker({
+        position: { lat: 1, lng: 2 }, // Fixed origin
+        map: this.map,
+        label: 'Origen',
+      });
     }
   }
 
-  loadMap(): void {
-    if (!this.mapLoaded) {
-      this.googleMapsLoader.load().then(() => {
-        this.initMap();
-        this.mapLoaded = true;
+  createDestinationMarker() {
+    if (this.map && this.latitud && this.longitud) {
+      this.destinationMarker = new google.maps.Marker({
+        position: { lat: this.latitud, lng: this.longitud },
+        map: this.map,
+        label: 'Destino',
       });
-    } else {
-      this.initMap();
     }
   }
 }

@@ -4,12 +4,12 @@ import { Alerta } from '../../core/models/alerta.model';
 import { AlertaService } from '../../core/services/alerta.service';
 import { AlertCardComponent } from '../../shared/components/alert-card/alert-card.component';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import {} from '@angular/common/http';
 
 @Component({
   selector: 'app-alerta-list',
   standalone: true,
-  imports: [CommonModule, AlertCardComponent, HttpClientModule],
+  imports: [CommonModule, AlertCardComponent],
   templateUrl: './alerta-list.component.html',
   styleUrl: './alerta-list.component.css',
 })

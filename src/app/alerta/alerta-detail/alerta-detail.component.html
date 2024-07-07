@@ -6,7 +6,15 @@
     <p><strong>Distrito:</strong> {{ alerta.strDistrito }}</p>
     <p><strong>Dirección:</strong> {{ alerta.strDireccion }}</p>
     <p><strong>Descripción:</strong> {{ alerta.strDescripcion }}</p>
-    <div id="map" style="height: 400px; width: 100%;"></div> <!-- Añadir mapa aquí -->
+    <!-- Mapa -->
+    <!-- en comentarios quiero el codigo que aparte de tener el punto de origen y destino trace la ruta en rojo -->
+    <google-map height="400px" width="750px" [center]="{ lat: latitud!, lng: longitud! }" [zoom]="zoom"
+        (mapClick)="onMapClick($event)">
+        <map-marker [position]="{ lat: -12, lng: -77.1170343 }" label="Origen"></map-marker> <map-marker
+            [position]="{ lat: latitud!, lng: longitud! }" label="Destino"></map-marker>
+    </google-map>
+    <div>Latitude: {{alerta.strLatitud}}</div>
+    <div>Longitude: {{alerta.strLongitud}}</div><!-- Añadir mapa aquí -->
     <div *ngIf="alerta.bitEstado">
         <button class="descartar-button" (click)="descartarAlerta()">Descartar</button>
         <div>
@@ -20,7 +28,7 @@
     </div>
 
     <div *ngIf="!alerta.bitEstado">
-        <button class="resolver-button" (click)="actualizarAlerta()">Alerta Resuelta</button>
+        <button class="resolver-button" (click)="descartarAlerta()">Alerta Resuelta</button>
     </div>
 </div>
 
