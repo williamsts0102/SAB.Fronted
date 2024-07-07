@@ -1,0 +1,19 @@
+/* Asegúrate de que el contenedor principal tenga un ancho del 100% y sea un flexbox */
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* Contenedor principal de los gráficos */
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+/* Estilos para cada gráfico */
+.chart {
+  width: calc(50% - 20px); /* Ajuste para que ocupe la mitad de la pantalla */
+  margin: 10px; /* Espaciado entre los gráficos */
+}
