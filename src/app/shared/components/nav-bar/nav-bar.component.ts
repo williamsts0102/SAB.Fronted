@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 export class NavBarComponent {
   menuActive: boolean = false;
 
-  //constructor(private router: Router) {}
+  constructor(private router: Router) {}
 
   toggleMenu() {
     this.menuActive = !this.menuActive;
@@ -21,6 +21,6 @@ export class NavBarComponent {
   logout() {
     // Lógica para cerrar sesión, por ejemplo, limpiar el almacenamiento local y redirigir al inicio de sesión
     //localStorage.clear();
-    //this.router.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 }
