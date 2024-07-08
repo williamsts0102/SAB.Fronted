@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Alerta } from '../models/alerta.model';
 import { GruposPersonalesActivos } from '../models/grupospersonalesactivos.model';
+import { Aler } from '../models/aler.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,10 @@ export class AlertaService {
 
   listarAlertas(): Observable<Alerta[]> {
     return this.http.get<Alerta[]>(`${this.apiUrl}/ListarAlerta`);
+  }
+
+  listarAlertasFull(): Observable<Aler[]> {
+    return this.http.get<Aler[]>(`${this.apiUrl}/ListarAlertasFull`);
   }
 
   detalleAlerta(codigo: string): Observable<Alerta> {

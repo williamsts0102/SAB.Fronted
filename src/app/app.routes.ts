@@ -9,6 +9,11 @@ export const routes: Routes = [
       import('./alerta/alerta.routes').then((m) => m.ALERTA_ROUTES),
   },
   {
+    path: 'personal',
+    loadChildren: () =>
+      import('./personal/personal.routes').then((m) => m.PERSONAL_ROUTES),
+  },
+  {
     path: 'estadistica',
     component: EstadisticaComponent,
   },

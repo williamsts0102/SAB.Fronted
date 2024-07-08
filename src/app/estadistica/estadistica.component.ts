@@ -13,6 +13,7 @@ import {
   provideCharts,
   withDefaultRegisterables,
 } from 'ng2-charts';
+import { Aler } from '../core/models/aler.model';
 
 @Component({
   selector: 'app-estadistica',
@@ -62,7 +63,7 @@ export class EstadisticaComponent {
   }
 
   loadChartData(): void {
-    this.alertaService.listarAlertas().subscribe((alertas: Alerta[]) => {
+    this.alertaService.listarAlertasFull().subscribe((alertas: Aler[]) => {
       const casosMes = alertas.length;
       const casosAtendidos = alertas.filter(
         (alerta) => alerta.bitEstado === false
@@ -71,7 +72,7 @@ export class EstadisticaComponent {
         (alerta) => alerta.bitEstado === true
       ).length;
       const casosFinalizados = alertas.filter(
-        (alerta) => alerta.bitEstado === true
+        (alerta) => alerta.bitEliminado === true
       ).length;
 
       this.barChartData.datasets[0].data = [

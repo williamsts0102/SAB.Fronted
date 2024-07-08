@@ -1,0 +1,26 @@
+.card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh; /* O ajusta la altura según tu diseño */
+}
+.grupo-card {
+  max-width: 300px; /* Ancho máximo ajustable según tus necesidades */
+  margin: 10px; /* Espacio alrededor de la tarjeta */
+  padding: 15px; /* Espacio interno dentro de la tarjeta */
+  border: 1px solid #ccc; /* Borde de color gris claro */
+  border-radius: 8px; /* Borde redondeado */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  text-align: center; /* Centrar texto dentro de la tarjeta */
+}
+
+.grupo-card .card-body {
+  margin-bottom: 10px; /* Espacio debajo del contenido */
+  font-size: 1.2rem; /* Tamaño del texto */
+}
+
+.grupo-card p {
+  margin-bottom: 5px; /* Espacio debajo de los párrafos */
+  font-size: 0.9rem; /* Tamaño del texto */
+  color: #666; /* Color de texto gris */
+}
